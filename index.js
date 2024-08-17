@@ -38,6 +38,7 @@ async function run() {
     });
 
     app.get('/api/products', async (req, res) => {
+      console.log(req.query)
       const { page = 1, limit = 10, brandName, category, minPrice, maxPrice, search, sortBy, sortOrder = 'asc' } = req.query;
       const filter = {};
     
@@ -80,6 +81,18 @@ async function run() {
           res.status(500).json({ error: "Internal Server Error" });
       }
   });
+  app.get('/api/category', async (req, res) => {
+    try {
+        const category = await productsCollection.aggregate([
+            { $group: { _id: "$category" } },
+            { $project: { _id: 0, category: "$_id" } }
+        ]).toArray();
+        res.json({ category: category.map(categories => categories.categories) });
+    } catch (error) {
+        console.error("Error fetching brands", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
   
 
   } catch (error) {
