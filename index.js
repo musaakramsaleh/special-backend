@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const corsOption = {
-    origin: ['http://localhost:5173','https://dummy-project-e80a8.web.app/'],
+    origin: ['http://localhost:5173','https://dummy-project-e80a8.web.app'],
     credentials: true,
     optionSuccessStatus: 200,
 };
