@@ -38,37 +38,41 @@ async function run() {
     });
 
     app.get('/api/products', async (req, res) => {
-      console.log(req.query)
-      const { page = 1, limit = 10, brandName, category, minPrice, maxPrice, search, sortBy, sortOrder = 'asc' } = req.query;
+      console.log(req.query);
+      const { page = 1, limit = 10, brandName, category, minPrice, maxPrice, search, sortBy, sortOrder = 'asc', dateSort } = req.query;
       const filter = {};
-    
+   
       if (brandName) filter.brandName = { $regex: brandName, $options: 'i' };
       if (category) filter.category = category;
       if (minPrice || maxPrice) filter.price = {};
       if (minPrice) filter.price.$gte = parseFloat(minPrice);
       if (maxPrice) filter.price.$lte = parseFloat(maxPrice);
       if (search) filter.productName = { $regex: search, $options: 'i' };
-    
+   
       const sort = {};
-      if (sortBy) sort[sortBy] = sortOrder === 'asc' ? 1 : -1;
-    
+      if (sortBy === 'date') {
+          sort.productCreationDateTime = dateSort === 'desc' ? -1 : 1;
+      } else if (sortBy) {
+          sort[sortBy] = sortOrder === 'asc' ? 1 : -1;
+      }
+   
       const products = await productsCollection
           .find(filter)
           .sort(sort)
           .skip((page - 1) * limit)
           .limit(parseInt(limit))
           .toArray();
-    
+   
       const totalProducts = await productsCollection.countDocuments(filter);
       const totalPages = Math.ceil(totalProducts / limit);
-    
+   
       res.json({
           products,
           totalPages,
           currentPage: parseInt(page),
           totalProducts
       });
-    });
+  });
     app.get('/api/brands', async (req, res) => {
       try {
           const brands = await productsCollection.aggregate([
@@ -81,15 +85,15 @@ async function run() {
           res.status(500).json({ error: "Internal Server Error" });
       }
   });
-  app.get('/api/category', async (req, res) => {
+  app.get('/api/categories', async (req, res) => {
     try {
-        const category = await productsCollection.aggregate([
+        const categories = await productsCollection.aggregate([
             { $group: { _id: "$category" } },
             { $project: { _id: 0, category: "$_id" } }
         ]).toArray();
-        res.json({ category: category.map(categories => categories.categories) });
+        res.json({ categories: categories.map(category => category.category) });
     } catch (error) {
-        console.error("Error fetching brands", error);
+        console.error("Error fetching categories", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
