@@ -1,11 +1,12 @@
 # Special Project
 
-### Here we mainly focused on creating a UI where users can get a lot of suggestions for searching, similar to a booking or travel site.
+### This project focuses on building a user interface with advanced filtering, sorting, and search functionalities, ideal for applications like booking or travel sites.
 
 ### Key Features:
-- Firebase has been used to ensure user login and registration for both Google and GitHub.
-- Category and brand name filtering.
-- Sort functionality with date and price.
+- **User Authentication:** Implemented using Firebase for Google and GitHub login and registration.
+- **Filtering:** Users can filter products by category and brand name.
+- **Sorting:** Products can be sorted by date and price.
+- **Search:** Search functionality allows users to find products by name.
 
 <br>
 
