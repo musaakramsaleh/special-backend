@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 const corsOption = {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173','https://dummy-project-e80a8.web.app/'],
     credentials: true,
     optionSuccessStatus: 200,
 };
@@ -30,9 +30,6 @@ async function run() {
   try {
     const database = client.db("PaymentDb");
     const productsCollection = database.collection('products');  // Reference the collection
-    
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    
     app.get('/', (req, res) => {
       res.send("Vaaiya tomar server medicine kiner jonno ready");
     });
@@ -97,8 +94,10 @@ async function run() {
         res.status(500).json({ error: "Internal Server Error" });
     }
 });
+await client.db("admin").command({ ping: 1 });
+console.log("Pinged your deployment. You successfully connected to MongoDB!");
   
-
+  
   } catch (error) {
     console.error("Error connecting to MongoDB", error);
   } finally {
