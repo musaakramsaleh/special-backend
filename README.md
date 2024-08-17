@@ -1,6 +1,6 @@
-# Special Project
+# Special Backend
 
-This project focuses on providing a robust backend for a product listing and searching interface, where users can filter, sort, and search products effectively.
+This project focuses on providing a robust backend for a product listing and searching interface, where users can filter, sort, and search products effectively. Main purpose was to learn the features of mongodb
 
 ## Key Features:
 
