@@ -43,9 +43,9 @@
 
 ### Cloning Steps:
 
-**Link:** [https://github.com/musaakramsaleh/special.git](https://github.com/musaakramsaleh/special.git)
+**Link:** [https://github.com/musaakramsaleh/special-backend.git](https://github.com/musaakramsaleh/special-backend.git)
 
 **Steps:**
-1. `git clone https://github.com/musaakramsaleh/special.git`
+1. `git clone https://github.com/musaakramsaleh/special-backend.git
 2. `npm i`
 3. `npm run dev`
