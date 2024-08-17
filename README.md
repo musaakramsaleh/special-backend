@@ -1,12 +1,16 @@
 # Special Project
 
-### This project focuses on building a user interface with advanced filtering, sorting, and search functionalities, ideal for applications like booking or travel sites.
+This project focuses on providing a robust backend for a product listing and searching interface, where users can filter, sort, and search products effectively.
 
-### Key Features:
-- **User Authentication:** Implemented using Firebase for Google and GitHub login and registration.
-- **Filtering:** Users can filter products by category and brand name.
-- **Sorting:** Products can be sorted by date and price.
-- **Search:** Search functionality allows users to find products by name.
+## Key Features:
+
+- **User Authentication:** Firebase is integrated for user login and registration, supporting both Google and GitHub authentication.
+- **Product Filtering:** Users can filter products by `brandName`, `category`, and price range (`minPrice` and `maxPrice`).
+- **Advanced Search:** Search functionality is available for product names using regex-based matching.
+- **Sorting Options:** Products can be sorted by `price` (ascending/descending) and `date added` (newest/oldest).
+- **Pagination:** Pagination is implemented to handle large datasets, allowing users to navigate through pages of products.
+- **Data Fetching:** Separate API endpoints are provided to fetch distinct lists of brands and categories for dynamic dropdown menus.
+
 
 <br>
 
